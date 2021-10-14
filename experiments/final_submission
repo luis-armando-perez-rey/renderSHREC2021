@@ -1,0 +1,16 @@
+#!/bin/bash
+GPU_USED=2
+# VAETL
+python main_autoencoder.py --collection_list Shape --modeltype VAETL --selectedviews 12 --submission True --epochs 200 --gpu 0 --class_alpha 100 --latentdim 100 --klweight 1
+python main_autoencoder.py --collection_list Culture --modeltype VAETL --selectedviews 12 --submission True --epochs 200 --gpu 0 --class_alpha 100 --latentdim 100 --klweight 1
+python main_autoencoder.py --collection_list Shape --modeltype VAETL --selectedviews 12 --submission True --submissiontag sphere --normalize True --epochs 200 --gpu 0 --class_alpha 100 --latentdim 100 --klweight 1
+python main_autoencoder.py --collection_list Culture --modeltype VAETL --selectedviews 12 --submission True --submissiontag sphere --normalize True --epochs 200 --gpu 0 --class_alpha 100 --latentdim 100 --klweight 1
+# AETL
+python main_autoencoder.py --collection_list Shape --modeltype AETL --selectedviews 12 --submission True --epochs 200 --gpu 0 --class_alpha 1 --latentdim 10 --klweight 1
+python main_autoencoder.py --collection_list Culture --modeltype AETL --selectedviews 12 --submission True --epochs 200 --gpu 0 --class_alpha 1 --latentdim 10 --klweight 1
+# TLtd
+python main_autoencoder.py --collection_list Shape --modeltype TLtd --selectedviews 12 --submission True --epochs 100 --gpu 0 --class_alpha 1 --latentdim 100 --classweights True --klweight 1
+python main_autoencoder.py --collection_list Culture --modeltype TLtd --selectedviews 12 --submission True --epochs 100 --gpu 0 --class_alpha 1 --latentdim 100 --classweights True --klweight 1
+# LSBD
+python main_autoencoder.py --challenge Shape --modeltype LSBDVAETL --submission True --epochs 100 --gpu 0 --class_alpha 100000 --latentdim 50 --klweight 1
+python main_autoencoder.py --challenge Culture --modeltype LSBDVAETL --submission True --epochs 100 --gpu 0 --class_alpha 100000 --latentdim 50 --klweight 1
