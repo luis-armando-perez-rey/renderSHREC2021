@@ -6,8 +6,8 @@ import numpy as np
 import json
 import tensorflow as tf
 import tensorflow_addons as tfa
-
-PROJECT_PATH = os.path.dirname(os.path.dirname(os.getcwd()))
+PROJECT_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+# PROJECT_PATH = os.path.dirname(os.path.dirname(os.getcwd()))
 sys.path.append(PROJECT_PATH)
 
 from data.data_loader import load_factor_data

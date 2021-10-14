@@ -6,20 +6,25 @@ import time
 import argparse
 import sys
 
-
+DATA_PATH = os.path.dirname(os.path.realpath(__file__))
 def parse_arguments():
   parser = argparse.ArgumentParser()
   parser.add_argument('--resolution', nargs="+", dest='resolution', type=int, default=[256, 256], help="resolution used to render images")
   parser.add_argument('--nviews', nargs="?", dest='nviews', type=int, default=12,
                       help="number of views to generate per 3D model")
-  parser.add_argument('--input_path', nargs="?", dest='input_path', type=str, default="./",
+  parser.add_argument('--input_path', nargs="?", dest='input_path', type=str, default="default",
                       help="input path where 3D models are")
-  parser.add_argument('--output_path', nargs="?", dest='output_path', type=str, default="./",
+  parser.add_argument('--output_path', nargs="?", dest='output_path', type=str, default="default",
                       help="output path where 3D models are placed")
   parser.add_argument('--max_obj_dim', nargs="?", dest='max_obj_dim', type=float, default=15.0,
                       help="maximum dimension in renders")
   parser.add_argument('--startmodel', nargs="?", dest='startmodel', type=int, default=0,
                       help="model number from which to start rendering")
+  parser.add_argument('--challenge', nargs="?", dest='challenge', type=str, default="Culture",
+                      help="challenge from which to render either Culture or Shape")
+  parser.add_argument('--split', nargs="?", dest='split', type=str, default="test",
+                      help="data to use for split either train or test")
+
   return parser.parse_known_args(sys.argv[sys.argv.index("--") + 1:])
 
 arguments, unknown = parse_arguments()
@@ -36,8 +41,17 @@ nviews = arguments.nviews
 start_model = arguments.startmodel
 
 # Paths
-object_folder = arguments.input_path
-save_render_path = arguments.output_path
+if arguments.input_path == "default":
+    input_path = DATA_PATH
+else:
+    input_path = arguments.input_path
+if arguments.output_path == "default":
+    output_path = os.path.join(DATA_PATH, "renders")
+else:
+    output_path = arguments.output_path
+
+object_folder = os.path.join(input_path, "dataset"+arguments.challenge, arguments.split)
+save_render_path = os.path.join(output_path, "dataset"+arguments.challenge, arguments.split+"_renders")
 os.makedirs(save_render_path, exist_ok=True)
 
 # Define rotation angles
