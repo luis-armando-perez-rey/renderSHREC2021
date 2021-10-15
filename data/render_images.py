@@ -46,13 +46,16 @@ if arguments.input_path == "default":
 else:
     input_path = arguments.input_path
 if arguments.output_path == "default":
-    output_path = os.path.join(DATA_PATH, "renders")
+     output_path = os.path.join(DATA_PATH, "renders")
 else:
     output_path = arguments.output_path
 
 object_folder = os.path.join(input_path, "dataset"+arguments.challenge, arguments.split)
 save_render_path = os.path.join(output_path, "dataset"+arguments.challenge, arguments.split+"_renders")
 os.makedirs(save_render_path, exist_ok=True)
+
+print("3D model folder", object_folder)
+print("Renders path", save_render_path)
 
 # Define rotation angles
 views = 2 * np.pi * np.linspace(0, 1, nviews, endpoint=False)
@@ -72,18 +75,20 @@ camera.scale = [1.0, 1.0, 1.0]
 bpy.context.scene.render.resolution_x = resolution[0]
 bpy.context.scene.render.resolution_y = resolution[1]
 
-# Set world properties
+#   Set world properties
 bpy.data.worlds["World"].node_tree.nodes["Background"].inputs[0].default_value = (1, 1, 1, 1)
 
 # OBJ files directory
+print(os.listdir(object_folder))
 list_paths = np.array(list(glob.glob(os.path.join(object_folder, "*.obj"))))
+print(os.path.join(object_folder, "*.obj"))
 object_id_list = np.array([int(os.path.basename(path).replace(".obj", "")) for path in list_paths])
 index_ordering = np.argsort(object_id_list)
 list_paths = list_paths[index_ordering]
 list_paths = list_paths[start_model:]
 object_id_list = object_id_list[index_ordering]
 object_id_list = object_id_list[start_model:]
-
+print("List of found paths", list_paths)
 for num_object, object_path in enumerate(list_paths):
     object_id = object_id_list[num_object]
 
