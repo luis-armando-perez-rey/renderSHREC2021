@@ -182,6 +182,39 @@ def create_views_dictionary(dictionary_, num_views):
     return views_dictionary
 
 
+
+
+def obtain_models_classes_clafile(cla_file_path):
+    """
+    Takes the path to a .cla file and returns two lists. The returned categories list corresponds to a list of
+    strings that contains the class values. The second list contains a set of arrays that contains the number of the
+    models in the corresponding class.
+    :param cla_file_path:
+    :return: categories, model_lists
+    """
+    with open(cla_file_path) as f:
+        arr = [line.replace("\n", "") for line in f]
+    # Read from the .cla file the number of categories
+    num_categories = int(arr[1].split(" ")[0])
+    initial_index = 3# Index for starting to read in the .cla file
+    categories = []
+    model_lists = []
+    for num_category in range(num_categories):
+        # Add a class to the category list
+        categories.append(arr[initial_index].split(" ")[0])
+        # Read in the .cla file the number of models for that given class
+        print('Initial index',arr[initial_index])
+        num_models = int(arr[initial_index].split(" ")[-1])
+        # Read the model numbers from the .cla file and save them in an array
+        array_models = []
+        for num_model in range(num_models):
+            array_models.append(arr[initial_index + 1 + num_model])
+        initial_index += num_models + 2
+        model_lists.append(array_models)
+    return categories, model_lists
+
+
+
 # -----------------------------------------------
 # Plotting utils
 # -----------------------------------------------
