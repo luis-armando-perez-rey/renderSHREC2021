@@ -1,0 +1,11 @@
+#!/bin/bash
+GPU_USED=0
+# VAETL
+python ./experiments/main_autoencoder.py --collection_list Shape --modeltype VAETL --selectedviews 12 --submission False --epochs 200 --gpu 0 --class_alpha 100 --latentdim 100 --klweight 1
+python ./experiments/main_autoencoder.py --collection_list Shape --modeltype VAETL --selectedviews 12 --submission False --submissiontag sphere --normalize True --epochs 200 --gpu 0 --class_alpha 100 --latentdim 100 --klweight 1
+# AETL
+python ./experiments/main_autoencoder.py --collection_list Shape --modeltype AETL --selectedviews 12 --submission False --epochs 200 --gpu 0 --class_alpha 1 --latentdim 10 --klweight 1
+# TLtd
+python ./experiments/main_autoencoder.py --collection_list Shape --modeltype TLtd --selectedviews 12 --submission False --epochs 100 --gpu 0 --class_alpha 1 --latentdim 100 --classweights True --klweight 1
+# LSBD
+python ./experiments/main_autoencoder.py --challenge Shape --modeltype LSBDVAETL --selectedviews 12--submission False --epochs 100 --gpu 0 --class_alpha 100000 --latentdim 50 --klweight 1
