@@ -1,5 +1,44 @@
 # SHREC2021 Retrieval of Cultural Heritage: Triplet Loss and Autoencoder 
-Code used to render images for the Triplet Loss and Autoencoder algorithms used for SHREC2021 Retrieval of Cultural Heritage Objects http://www.ivan-sipiran.com/shrec2021.html. Approach is described in Section 3.4 [1].
+Code used to render images for the Triplet Loss and Autoencoder algorithms used for the SHape Retrieval Challenge (SHREC) of 2021 on the Retrieval of Cultural Heritage Objects http://www.ivan-sipiran.com/shrec2021.html. This challenge consists on the retrieval of 3D models of pre-columbian peruvian artifacts based on 2 criteria shape and culture. In this repository we describe the approach of Section 3.4 [1] that uses triplet loss and autoencoder methods.
+
+# Requirements
+Blender 2.82 https://www.blender.org/download/releases/2-82/
+
+# Rendering
+To render images from the 3D models first download the datasets from http://www.ivan-sipiran.com/shrec2021.html and unzip the datasets in /data/shrec2021. The resulting structure of the data folder should be:
+```
+renderSHREC2021
+└---data
+    shrec2021
+    └---datasetCulture
+        └---train
+            1.obj
+            2.obj
+            ...
+        └---test
+            1.obj
+            2.obj
+            ...
+    └---datasetShape
+        └---train
+                1.obj
+                2.obj
+                ...
+            └---test
+                1.obj
+                2.obj
+                ...
+```
+
+In order to render the images for the Culture and Shape challenge after installation of blender run the following command from the main project folder:
+```bash
+blender -b ./data/render_shrec2021.blend -P ./data/render_images.py -- --input_path ./data/shrec2021/ --challenge Culture Shape --split train test
+```
+Then run the following command to create h5 files from the rendered images to load images more easily
+```bash
+python ./data/make_h5_file.py
+```
+
 
 
 ### References
