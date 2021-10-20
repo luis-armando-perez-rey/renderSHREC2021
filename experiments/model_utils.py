@@ -230,8 +230,6 @@ def load_model(data_class: GroupedDataset,
                                           latent_spaces=[circular_latent, latent_space],
                                           reconstruction_loss=reconstruction_loss(),
                                           **model_parameters)
-        # model_dictionary = model_class.setup_model(n_transformed_datapoints=data_class.selected_views,
-        #                                            model_name="LSBDVAETL")
     elif model_type == "LSBDVAE":
         latent_space_parameters = {"dim": total_latent_dim,
                                    "kl_weight": kl_weight[1]}
@@ -250,55 +248,17 @@ def load_model(data_class: GroupedDataset,
                                    latent_spaces=[circular_latent, latent_space],
                                    reconstruction_loss=reconstruction_loss,
                                    )
-        # model_dictionary = model_class.setup_model(n_transformed_datapoints=data_class.selected_views,
-        #                                            model_name="LSBDVAE")
-
     elif model_type == "TLo":
         model_class = TLo(encoder_backbone=encoder_backbone,
                           latent_dim=total_latent_dim,
                           n_transforms=data_class.selected_views,
                           input_shape=data_class.image_shape
                           )
-        # model_parameters = {"dim": total_latent_dim}
-        # input_encoder = tf.keras.layers.Input(data_class.image_shape)
-        # h_out_enc = encoder_backbone(input_encoder)
-        # h_out_enc = tf.keras.layers.Dense(model_parameters["dim"])(h_out_enc)
-        # encoder = tf.keras.models.Model(input_encoder, h_out_enc)
-        #
-        # input_layer = tf.keras.layers.Input((data_class.selected_views, *data_class.image_shape))
-        # h_out = tf.keras.layers.TimeDistributed(encoder)(input_layer)
-        # h_out = tf.keras.layers.Lambda(lambda y: tf.math.reduce_mean(y, axis=1))(h_out)
-        # h_out = tf.keras.layers.Lambda(lambda x: tf.math.l2_normalize(x, axis=-1))(h_out)
-        #
-        # model_class = tf.keras.models.Model(input_layer, h_out)
-
-        # def encode_images(self, images):
-        #     return [encoder.predict(images)]
-        #
-        # model_class.encode_images = encode_images.__get__(model_class)
-        # model_class.add_loss(tfa.losses.TripletSemiHardLoss())
     elif model_type == "TL":
         model_class = TL(encoder_backbone=encoder_backbone,
                                             latent_dim=total_latent_dim,
                                             input_shape=data_class.image_shape
                                             )
-        # model_parameters = {"dim": total_latent_dim}
-        # input_layer = tf.keras.layers.Input(data_class.image_shape)
-        # h_out = encoder_backbone(input_layer)
-        # h_out = tf.keras.layers.Dense(model_parameters["dim"])(h_out)
-        # h_out = tf.keras.layers.Lambda(lambda x: tf.math.l2_normalize(x, axis=-1))(h_out)
-        # model_class = tf.keras.models.Model(input_layer, h_out)
-        # model_class.add_loss(tfa.losses.TripletSemiHardLoss())
-        # model_class.__class__.__name__ = "TL"
-        #
-        # def encode_images(self, images):
-        #     return [self.predict(images)]
-
-        # model_class.encode_images = encode_images.__get__(model_class)
-        # TODO: Check whether this is necessary
-        # model_class.compile(optimizer=tf.keras.optimizers.Adam(lr=1e-3), loss=tfa.losses.TripletSemiHardLoss())
-        # print("MODEL CLASS", model_class.__class__.__name__)
-
     else:
         model_class = None
         print(model_type + " model doesn't exist")

@@ -1,5 +1,4 @@
 import numpy as np
-import neptune
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from sklearn.decomposition import PCA
@@ -419,7 +418,6 @@ def plot_embeddings_pca(embeddings, colors=None, ax=None, alpha=1.0):
     else:
         fig = plt.gcf()
     if colors is not None:
-        # TODO change for appropiate color scheme
         ax.scatter(x_embedded[:, 0], x_embedded[:, 1], c=colors, alpha=alpha)
     else:
         ax.scatter(x_embedded[:, 0], x_embedded[:, 1], alpha=alpha)
@@ -586,34 +584,3 @@ def fig_pca_dictionary(embeddings_dictionary, labels_dictionary):
     return fig_dictionary
 
 
-# ------------------------
-# Neptune logging utils
-# ------------------------
-
-
-def neptune_log_fig_dictionary(fig_dictionary, base_name=""):
-    """
-    Logs figures from a dictionary into a neptune experiment
-    Args:
-        fig_dictionary: dictionary of figures
-        base_name: base name to be used for saving figures
-
-    Returns:
-
-    """
-    for key in fig_dictionary.keys():
-        neptune.log_image('plots', fig_dictionary[key], image_name=base_name + "_" + key)
-
-
-def neptune_log_metric_dictionary(metric_dictionary, base_name=""):
-    """
-    Logs metrics from a dictionary into a neptune experiment
-    Args:
-        metric_dictionary:
-        base_name:
-
-    Returns:
-
-    """
-    for key in metric_dictionary.keys():
-        neptune.log_metric(base_name + "_" + key, metric_dictionary[key])

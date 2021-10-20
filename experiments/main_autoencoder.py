@@ -8,6 +8,7 @@ import tensorflow as tf
 import tensorflow_addons as tfa
 PROJECT_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 # PROJECT_PATH = os.path.dirname(os.path.dirname(os.getcwd()))
+print("Project path", PROJECT_PATH)
 sys.path.append(PROJECT_PATH)
 
 from data.data_loader import load_factor_data
@@ -15,7 +16,7 @@ from modules.vae.architectures import get_encoder_decoder
 from modules.vae.autoencoder_models import AEClass, AETL, AE
 from modules.vae.vae_models import VAE, VAEClass, VAETL
 from modules.vae.triplet_transformvae import TripletTransformVAE
-from modules.vae.transformvae import TransformVAE
+from modules.vae.transformvae_model import TransformVAE
 from modules.vae.reconstruction_losses import bernoulli_loss
 from modules.latent_space.latentspace2 import GaussianLatentSpace, HyperSphericalLatentSpace
 from modules.utils import shrec_utils, shrec_evaluation
@@ -61,7 +62,7 @@ parser.add_argument('--epochs', nargs="?", dest='epochs', type=int, default=100,
 parser.add_argument('--batchsize', nargs="?", dest='batch_size', type=int, default=50, help="batch size")
 
 # Make submission
-parser.add_argument('--submission', nargs="?", dest="submission", type=bool, default=False)
+parser.add_argument('--submission', nargs="?", dest="submission", type=int, default=0)
 parser.add_argument('--submissiontag', nargs="?", dest="submission_tag", type=str, default="")
 
 # ---------------------
@@ -98,7 +99,7 @@ batch_size = args.batch_size
 cw_bool = args.cw_bool
 
 # Submission parameters
-submission = args.submission
+submission = bool(args.submission)
 submission_tag = args.submission_tag
 if submission:
     test_split = 0.0
@@ -110,8 +111,9 @@ parameters = {}
 # --------------------
 if dataset == "shrec2021":
     data_parameters = {"data": "shrec2021",
-                       "root_path": PROJECT_PATH,
-                       "collection_list": challenge,
+                       "root_path": os.path.join(PROJECT_PATH, "data"),
+                       "collection_list": [challenge],
+                       "dataset_directory":"shrec2021",
                        "data_type": "train"}
     parameters.update(data_parameters)
     dataset_class = load_factor_data(**data_parameters)
@@ -133,9 +135,11 @@ if dataset == "shrec2021":
 
 
 if submission:
+    print("Submission is selected")
     data_parameters = {"data": "shrec2021",
-                       "root_path": PROJECT_PATH,
-                       "collection_list": challenge,
+                       "root_path": os.path.join(PROJECT_PATH, "data"),
+                       "collection_list": [challenge],
+                       "dataset_directory": "shrec2021",
                        "data_type": "test"}
     parameters.update(data_parameters)
     dataset_class = load_factor_data(**data_parameters)
@@ -305,10 +309,9 @@ decoder_backbone.summary()
 
 save_path = os.path.join(PROJECT_PATH, "results", "shrec2021", model_type)
 os.makedirs(save_path, exist_ok=True)
-if dataset == "modelnet40":
-    model_name = model_type + "_" + architecture + "_modelnet40"
-else:
-    model_name = model_type + "_" + architecture + "_" + data_parameters["collection_list"]
+
+
+model_name = model_type + "_" + architecture + "_" + challenge
 
 training_parameters = {"batch_size": batch_size,
                        "epochs": epochs,

@@ -40,8 +40,6 @@ class LatentSpace:
         # must be set within subclasses:
         self.params_layers = None  # list of layers, one for each parameter of the posterior
         self.transformation_shape = None  # shape tuple
-
-        # TODO: Added locations and scale parameters to avoid indexing merge after tests and remove this comment
         self.loc_param_layer = None
         self.scale_param_layer = None
 
@@ -334,7 +332,6 @@ class HyperSphericalLatentSpace(LatentSpace):
         return kl_loss
 
     def sample_from_prior(self, batch_shape):
-        # TODO: make rejection sampling to prevent problems with near-zero norms
         random_normal = np.random.normal(size=batch_shape + (self.latent_dim,), loc=0, scale=1)
         norm = np.linalg.norm(random_normal)
         return random_normal / norm
@@ -374,9 +371,8 @@ class HyperSphericalLatentSpace(LatentSpace):
         elif self.latent_dim == 3:
             # z has shape (*batch_dims, 3) and transformations (*batch_dims, 4)
             # rotate each entry in z with the corresponding angle in transformations
-            axis = transformations[..., :3]  # shape (*batch_dims, 3) TODO: check if this works correctly
-            angle = transformations[..., 3:]  # shape (*batch_dims, 1) TODO: check if this works correctly
-            # TODO: this may give the same error as rotation_matrix_2d did, in that case we need to copy the implem.
+            axis = transformations[..., :3]  # shape (*batch_dims, 3)
+            angle = transformations[..., 3:]  # shape (*batch_dims, 1)
             # rotation_matrices = tfg.geometry.transformation.rotation_matrix_3d.from_axis_angle(axis, angle)
             rotation_matrices = from_axis_angle(axis, angle)
             z = K.expand_dims(z, axis=-1)  # add dim of size 1 at the end, resulting shape (*batch_dims, 3, 1)
