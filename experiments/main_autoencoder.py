@@ -111,7 +111,7 @@ parameters = {}
 # --------------------
 if dataset == "shrec2021":
     data_parameters = {"data": "shrec2021",
-                       "root_path": os.path.join(os.path.dirname(PROJECT_PATH), "data"),
+                       "root_path": os.path.join(PROJECT_PATH, "data"),
                        "collection_list": [challenge],
                        "dataset_directory":"shrec2021",
                        "data_type": "train"}
@@ -137,7 +137,7 @@ if dataset == "shrec2021":
 if submission:
     print("Submission is selected")
     data_parameters = {"data": "shrec2021",
-                       "root_path": os.path.join(os.path.dirname(PROJECT_PATH), "data"),
+                       "root_path": os.path.join(PROJECT_PATH, "data"),
                        "collection_list": [challenge],
                        "dataset_directory": "shrec2021",
                        "data_type": "test"}

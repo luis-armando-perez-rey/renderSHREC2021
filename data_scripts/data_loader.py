@@ -1,7 +1,7 @@
 import os
 import h5py
 import numpy as np
-from data.factor_dataset import FactorImageDataset
+from data_scripts.factor_dataset import FactorImageDataset
 
 AVAILABLE_COLLECTIONS = ["Shape", "Culture"]
 AVAILABLE_DATA_TYPES = ["train", "test"]
