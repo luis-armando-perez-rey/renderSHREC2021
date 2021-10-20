@@ -5,11 +5,10 @@ Code used to render images for the Triplet Loss and Autoencoder algorithms used 
 Blender 2.82 https://www.blender.org/download/releases/2-82/
 
 # Rendering
-To render images from the 3D models first download the datasets from http://www.ivan-sipiran.com/shrec2021.html and unzip the datasets in /data/shrec2021. The resulting structure of the data folder should be:
+To render images from the 3D models first download the datasets from http://www.ivan-sipiran.com/shrec2021.html and unzip the datasets in /data. The resulting structure of the data folder should be:
 ```
 renderSHREC2021
 └---data
-    shrec2021
     └---datasetCulture
         └---train
             1.obj
@@ -32,14 +31,33 @@ renderSHREC2021
 
 In order to render the images for the Culture and Shape challenge after installation of blender run the following command from the main project folder:
 ```bash
-blender -b ./data/render_shrec2021.blend -P ./data/render_images.py -- --input_path ./data/shrec2021/ --challenge Culture Shape --split train test
+blender -b ./data_scripts/render_shrec2021.blend -P ./data_scripts/render_images.py -- --input_path ./data --challenge Culture Shape --split train test
 ```
 Then run the following command to create h5 files from the rendered images to load images more easily
 ```bash
-python ./data/make_h5_file.py
+python ./data_scripts/make_h5_file.py
+```
+
+# Docker container
+To create a docker container run in the main project folder
+```bash
+docker build .
+```
+Run the command to get the id of the image
+```bash
+docker images
+```
+The output should look like
+```
+REPOSITORY         TAG       IMAGE ID       CREATED       SIZE
+REPOSITORY_ID      TAG_ID    IMAGE_ID      10 sec ago     2.9GB
 ```
 
 
+Finally run 
+```bash
+docker run --name Project v ./data:/data IMAGE_ID ./run_culture ./run 
+```
 
 ### References
 [1] Sipiran, I., Lazo, P., Lopez, C., Jimenez, M., Bagewadi, N., Bustos, B., Dao, H., Gangisetty, S., Hanik, M., Ho-Thi, N-P., Holenderski, M. J., Jarnikov, D. S., Labrada, A., Lengauer, S., Licandro, R., Nguyen, D-H., Nguyen-Ho, T-L., Perez Rey, L. A., Pham, B-D., Pham, M-K. & 6 others, Preiner, R., Schreck, T., Trinh, Q-H., Tonnaer, L. M. A., von Tycowicz, C. & Vu-Le, T-A., "SHREC 2021: Retrieval of cultural heritage objects" (2021), In Computers and Graphics. 100, p. 1-20 20 p.
