@@ -71,6 +71,9 @@ bash final_submission
 ```
 This will train the models with the corresponding hyperparameters for each challenge. The hyperparameters are described in detail in [1].
 
+### Acknowledgements
+This work has received funding from the NWO-TTW Programme “Efficient Deep Learning”(EDL) P16-25. https://efficientdeeplearning.nl/
+
 ### References
 [1] Sipiran, I., Lazo, P., Lopez, C., Jimenez, M., Bagewadi, N., Bustos, B., Dao, H., Gangisetty, S., Hanik, M., Ho-Thi, N-P., Holenderski, M. J., Jarnikov, D. S., Labrada, A., Lengauer, S., Licandro, R., Nguyen, D-H., Nguyen-Ho, T-L., Perez Rey, L. A., Pham, B-D., Pham, M-K. & 6 others, Preiner, R., Schreck, T., Trinh, Q-H., Tonnaer, L. M. A., von Tycowicz, C. & Vu-Le, T-A., "SHREC 2021: Retrieval of cultural heritage objects" (2021), In Computers and Graphics. 100, p. 1-20 20 p.
 
