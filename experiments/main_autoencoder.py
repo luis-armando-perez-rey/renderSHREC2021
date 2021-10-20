@@ -11,7 +11,7 @@ PROJECT_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 print("Project path", PROJECT_PATH)
 sys.path.append(PROJECT_PATH)
 
-from data.data_loader import load_factor_data
+from data_scripts.data_loader import load_factor_data
 from modules.vae.architectures import get_encoder_decoder
 from modules.vae.autoencoder_models import AEClass, AETL, AE
 from modules.vae.vae_models import VAE, VAEClass, VAETL
@@ -111,7 +111,7 @@ parameters = {}
 # --------------------
 if dataset == "shrec2021":
     data_parameters = {"data": "shrec2021",
-                       "root_path": os.path.join(PROJECT_PATH, "data"),
+                       "root_path": os.path.join(os.path.dirname(PROJECT_PATH), "data"),
                        "collection_list": [challenge],
                        "dataset_directory":"shrec2021",
                        "data_type": "train"}
@@ -137,7 +137,7 @@ if dataset == "shrec2021":
 if submission:
     print("Submission is selected")
     data_parameters = {"data": "shrec2021",
-                       "root_path": os.path.join(PROJECT_PATH, "data"),
+                       "root_path": os.path.join(os.path.dirname(PROJECT_PATH), "data"),
                        "collection_list": [challenge],
                        "dataset_directory": "shrec2021",
                        "data_type": "test"}

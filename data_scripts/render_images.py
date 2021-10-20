@@ -6,7 +6,7 @@ import time
 import argparse
 import sys
 
-DATA_PATH = os.path.dirname(os.path.realpath(__file__))
+DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
 def parse_arguments():
   parser = argparse.ArgumentParser()
   parser.add_argument('--resolution', nargs="+", dest='resolution', type=int, default=[256, 256], help="resolution used to render images")
@@ -49,6 +49,7 @@ if arguments.output_path == "default":
      output_path = os.path.join(DATA_PATH, "renders")
 else:
     output_path = arguments.output_path
+
 for challenge in arguments.challenges:
     for split in arguments.splits:
         object_folder = os.path.join(input_path, "dataset"+challenge, split)

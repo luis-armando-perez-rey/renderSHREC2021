@@ -15,7 +15,7 @@ parser.add_argument('--resolution', nargs="+", dest='resolution', type=int, defa
                     help="resolution used to render images")
 parser.add_argument('--nviews', nargs="?", dest='nviews', type=int, default=12,
                     help="number of views to generate per 3D model")
-parser.add_argument('--render_path', nargs="?", dest='render_path', type=str, default="./renders",
+parser.add_argument('--render_path', nargs="?", dest='render_path', type=str, default="../data/renders",
                     help="input path where renders are")
 parser.add_argument('--challenge', nargs="?", dest='challenge', type=str, default="Culture",
                       help="challenge from which to render either Culture or Shape")

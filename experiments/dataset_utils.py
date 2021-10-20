@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 PROJECT_PATH = os.path.dirname(os.path.dirname(os.getcwd()))
 sys.path.append(PROJECT_PATH)
 
-from data.data_loader import load_factor_data
+from data_scripts.data_loader import load_factor_data
 from modules.utils import shrec_utils
 
 
