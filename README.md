@@ -3,6 +3,11 @@ Code used to render images for the Triplet Loss and Autoencoder algorithms used 
 
 # Requirements
 Blender 2.82 https://www.blender.org/download/releases/2-82/
+For package requirements see requirements.txt
+Important packages are:
+- tensorflow-probability==0.7.0
+- tensorflow-addons==0.13.0
+Code works with tf2. 
 
 # Rendering
 To render images from the 3D models first download the datasets from http://www.ivan-sipiran.com/shrec2021.html and unzip the datasets in /data. The resulting structure of the data folder should be:
