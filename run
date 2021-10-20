@@ -1,0 +1,4 @@
+#!/bin/bash
+GPU_USED=0
+bash ./run_culture
+bash ./run_shape
