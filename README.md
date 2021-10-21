@@ -59,9 +59,15 @@ REPOSITORY_ID      TAG_ID    IMAGE_ID      10 sec ago     2.9GB
 ```
 
 
-Finally run 
+Finally create the container 
+*Linux:*
+
 ```bash
-docker run --name Project v ./data:/data IMAGE_ID ./run_culture ./run 
+docker run --name Project v $PWD/data:/data IMAGE_ID ./run 
+```
+*Windows*
+```bash
+docker run --name Project v %cd%/data:/data IMAGE_ID ./run 
 ```
 
 # Reproducing results
