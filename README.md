@@ -63,13 +63,18 @@ Finally create the container
 *Linux:*
 
 ```bash
-docker run --name Project v $PWD/data:/data IMAGE_ID ./run 
+docker run --name Project -v $PWD/data:/renderSHREC2021/data IMAGE_ID ./run 
 ```
 *Windows*
 ```bash
-docker run --name Project v %cd%/data:/data IMAGE_ID ./run 
+docker run --name Project -v %cd%/data:/renderSHREC2021/data IMAGE_ID ./run 
 ```
-
+# Docker Load
+If the image for the container project.tar.gz is available (shared only privately please contact l.a.perez.rey@tue.nl for sharing) first run
+```
+docker load < project.tar.gz
+```
+and then follow the steps in [Docker Section](#docker-container)
 # Reproducing results
 To reproduce the results presented in [1] after having created the h5 files please go to /experiments folder and run 
 ```bash
