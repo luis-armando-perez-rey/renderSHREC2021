@@ -1,5 +1,5 @@
 # SHREC2021 Retrieval of Cultural Heritage: Triplet Loss and Autoencoder 
-Code used to render images for the Triplet Loss and Autoencoder algorithms used for the SHape Retrieval Challenge (SHREC) of 2021 on the Retrieval of Cultural Heritage Objects http://www.ivan-sipiran.com/shrec2021.html. This challenge consists on the retrieval of 3D models of pre-columbian peruvian artifacts based on two criteria: shape and culture. In this repository we describe the approach of Section 3.4 [1] that uses triplet loss and autoencoder methods.
+Code used to render images for the Triplet Loss and Autoencoder algorithms used for the SHape Retrieval Challenge (SHREC) of 2021 on the Retrieval of Cultural Heritage Objects http://www.ivan-sipiran.com/shrec2021.html. This challenge consists on the retrieval of 3D models of pre-columbian peruvian artifacts based on two criteria: shape and culture. In this repository we describe the approach of Section 3.4 [1] that uses triplet loss and autoencoder methods. The evaluation tool used to measure the performance as in [1] can be found in this ![Github repository](https://github.com/ivansipiran/shrec2021-cultural-heritage).
 
 ![AltText](https://media.giphy.com/media/9uZaQMprf1NVMzybhp/giphy.gif)
 
